@@ -25,3 +25,18 @@ export interface CellStyleInterface {
   blue: React.CSSProperties,
   red: React.CSSProperties
 }
+
+export interface PlayerStyleInterface {
+  container: React.CSSProperties,
+  title: React.CSSProperties,
+  playerOne: React.CSSProperties,
+  playerTwo: React.CSSProperties,
+  piecesContainer: React.CSSProperties
+}
+
+export interface HandPieceStyleInterface {
+  piece: React.CSSProperties,
+  title: React.CSSProperties,
+  playerOne: React.CSSProperties,
+  playerTwo: React.CSSProperties
+}
