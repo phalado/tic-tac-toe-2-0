@@ -9,11 +9,7 @@ const Cell = ({
 }: CellInterface) => {
   const colorStyle = color ? styles.blue : styles.red
 
-  const fillingValue = () => {
-    if (value === 0) return null
-
-    return <p style={colorStyle}>{value}</p>
-  }
+  const fillingValue = () => value === 0 ? null : <p style={colorStyle}>{value}</p>
 
   return (
     <div style={{ ...styles.container, ...styles.clickable }}>

@@ -1,6 +1,15 @@
 import { combineReducers } from "redux";
 
-const rootReducer = combineReducers({
-})
+import playerOne from "./playerOne";
+import playerTwo from "./playerTwo";
+import game from "./game";
+import table from "./table";
 
-export default rootReducer;
+const rootReducer = combineReducers({
+  playerOne,
+  playerTwo,
+  game,
+  table
+});
+
+export default rootReducer

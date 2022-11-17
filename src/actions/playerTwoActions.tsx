@@ -1,0 +1,4 @@
+export const removePieceFromHandTwo = (pieces: number[]) => ({
+  type: "REMOVE_PIECE_FROM_HAND_TWO",
+  pieces
+})
