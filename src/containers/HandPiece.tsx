@@ -8,7 +8,7 @@ const mapStateToProps = (state: StateInterface) => ({
   game: state.game
 });
 
-const mapDispatchToProps = (dispatch: (selectedPiece: any) => void) => ({
+const mapDispatchToProps = (dispatch: any) => ({
   changeSelectedPiece: (selectedPiece: { index: number, value: number }) => {
     dispatch(changeSelectedPiece(selectedPiece))
   }

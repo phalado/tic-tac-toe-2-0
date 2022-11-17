@@ -1,6 +1,6 @@
-// import TableInterface from "../interfaces/TableInterface";
+import TableInterface from "../interfaces/TableInterface";
 
-const table = (state: any = {}, action: { type: string, table: string[] }) => {
+const table = (state: any = {}, action: { type: string, table: TableInterface[] }) => {
   switch (action.type) {
     case "CHANGE_TABLE_STATE":
       return [...action.table]
