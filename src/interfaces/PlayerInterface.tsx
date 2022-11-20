@@ -1,11 +1,11 @@
 export default interface PlayerInterface {
-  playerNumber: boolean,
+  playerNumber: boolean
   playerOne: {
-    username: string,
+    username: string
     pieces: number[]
-  },
+  }
   playerTwo: {
-    username: string,
+    username: string
     pieces: number[]
   }
 }

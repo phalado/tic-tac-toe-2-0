@@ -4,6 +4,7 @@ import CellInterface from "../interfaces/CellInterface";
 import TableInterface from "../interfaces/TableInterface";
 
 import styles from "../styles/cellStyles";
+import Piece from "./Piece";
 
 const Cell = ({
   color,
@@ -20,14 +21,13 @@ const Cell = ({
   endGame
 }: CellInterface) => {
   const { currentPlayer, selectedPieceValue, selectedPieceIndex, gameOn } = game
-  const colorStyle = color ? styles.blue : styles.red
 
   const clickable = selectedPieceValue > value && gameOn
   
   const fillingValue = () => {
     if (value === 0) return null
 
-    return <p style={colorStyle}>{value}</p>
+    return <Piece color={color} value={value} />
   }
 
   const handleClickingCell = () => {

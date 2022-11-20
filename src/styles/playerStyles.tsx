@@ -24,7 +24,7 @@ const PlayerStyles: PlayerStyleInterface = {
     height: '80%',
     display: 'flex',
     flexWrap: 'wrap',
-    flexDirection: 'column',
+    flexDirection: 'row',
     justifyContent: 'space-around',
     alignContent: 'center'
   }

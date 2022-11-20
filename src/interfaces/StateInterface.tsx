@@ -1,21 +1,21 @@
 export default interface StateInterface {
   table: {
-    value: number,
+    value: number
     color: boolean
-  }[],
+  }[]
   playerOne: {
-    username: string,
+    username: string
     pieces: number[]
-  },
+  }
   playerTwo: {
-    username: string,
+    username: string
     pieces: number[]
-  },
+  }
   game: {
-    round: number,
-    currentPlayer: boolean,
-    selectedPieceIndex: number,
-    selectedPieceValue: number,
+    round: number
+    currentPlayer: boolean
+    selectedPieceIndex: number
+    selectedPieceValue: number
     gameOn: true
   }
 }

@@ -10,12 +10,6 @@ const CellStyles: CellStyleInterface = {
   },
   clickable: {
     cursor: 'pointer'
-  },
-  blue: {
-    color: 'blue'
-  },
-  red: {
-    color: 'red'
   }
 };
 
