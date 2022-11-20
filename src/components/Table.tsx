@@ -12,7 +12,7 @@ const Table = ({ table }: { table: TableInterface[] }) => {
     <Line direction='horizontal' face='left' />
     <Line direction='vertical' face='top' />
     <Line direction='vertical' face='bottom' />
-    {table.map((cell, index) => <Cell value={cell.value} color={cell.color} index={index} />)}
+    {table.map((cell, index) => <Cell value={cell.value} color={cell.color} index={index} key={index} />)}
   </div>
 )}
 

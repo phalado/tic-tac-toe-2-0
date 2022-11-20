@@ -21,7 +21,7 @@ const Player = ({playerNumber, playerOne, playerTwo}: PlayerInterface) => {
       <h2 style={titleStyles}>{player.username}</h2>
       <div style={styles.piecesContainer}>
         {player.pieces.map((value, index) => (
-          <HandPiece playerNumber={playerNumber} value={value} index={index} />
+          <HandPiece playerNumber={playerNumber} value={value} index={index} key={index} />
         ))}
       </div>
     </div>

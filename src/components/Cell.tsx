@@ -31,16 +31,19 @@ const Cell = ({
   }
 
   const handleClickingCell = () => {
-    (table as TableInterface[])[index] = { value: selectedPieceValue, color: currentPlayer }
-    changeTableState(table as TableInterface[])
+    const newTable: TableInterface[] = Object.assign([], table);
+    newTable[index] = { value: selectedPieceValue, color: currentPlayer }
+    changeTableState(newTable)
     if (currentPlayer) {
-      playerOne.pieces.splice(selectedPieceIndex, 1)
-      removePieceFromHandOne(playerOne.pieces)
+      const newPieces = Object.assign([], playerOne.pieces);
+      newPieces.splice(selectedPieceIndex, 1)
+      removePieceFromHandOne(newPieces)
     } else {
-      playerTwo.pieces.splice(selectedPieceIndex, 1)
-      removePieceFromHandTwo(playerTwo.pieces)
+      const newPieces = Object.assign([], playerTwo.pieces);
+      newPieces.splice(selectedPieceIndex, 1)
+      removePieceFromHandTwo(newPieces)
     }
-    if (checkEndGame(table as TableInterface[])) {
+    if (checkEndGame(newTable)) {
       console.log("Fim de Jogo")
       endGame()
     } else changeCurrentPlayer()

@@ -1,8 +1,9 @@
 import { connect } from "react-redux";
-import { changeSelectedPiece } from "../actions";
-
 import HandPiece from "../components/HandPiece";
+
 import StateInterface from "../interfaces/StateInterface";
+
+import { changeSelectedPiece } from "../slicers/gameSlicer";
 
 const mapStateToProps = (state: StateInterface) => ({
   game: state.game

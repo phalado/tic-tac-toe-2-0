@@ -1,8 +1,13 @@
 import { connect } from "react-redux";
 import Cell from "../components/Cell";
-import { changeCurrentPlayer, changeTableState, endGame, removePieceFromHandOne, removePieceFromHandTwo } from "../actions";
+
 import TableInterface from "../interfaces/TableInterface";
 import StateInterface from "../interfaces/StateInterface";
+
+import { changeTableState } from "../slicers/tableSlicer";
+import { changeCurrentPlayer, endGame } from "../slicers/gameSlicer";
+import { removePieceFromHandOne } from "../slicers/playerOneSlicer";
+import { removePieceFromHandTwo } from "../slicers/playerTwoSlicer";
 
 const mapStateToProps = (state: StateInterface) => ({
   game: state.game,
