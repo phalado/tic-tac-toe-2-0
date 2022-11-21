@@ -1,7 +1,9 @@
 import React from "react";
+import { removePieceFromHand } from "../helpers/CellHelpers";
 import { checkEndGame } from "../helpers/Gamehelpers";
 import CellInterface from "../interfaces/CellInterface";
 import TableInterface from "../interfaces/TableInterface";
+import { submitNewMove } from "../services/socketServices";
 
 import styles from "../styles/cellStyles";
 import Piece from "./Piece";
@@ -20,7 +22,7 @@ const Cell = ({
   removePieceFromHandTwo,
   endGame
 }: CellInterface) => {
-  const { currentPlayer, selectedPieceValue, selectedPieceIndex, gameOn } = game
+  const { playerTurn, selectedPieceValue, selectedPieceIndex, gameOn, round, gameId } = game
 
   const clickable = selectedPieceValue > value && gameOn
   
@@ -32,17 +34,17 @@ const Cell = ({
 
   const handleClickingCell = () => {
     const newTable: TableInterface[] = Object.assign([], table);
-    newTable[index] = { value: selectedPieceValue, color: currentPlayer }
+    newTable[index] = { value: selectedPieceValue, color: playerTurn }
     changeTableState(newTable)
-    if (currentPlayer) {
-      const newPieces = Object.assign([], playerOne.pieces);
-      newPieces.splice(selectedPieceIndex, 1)
-      removePieceFromHandOne(newPieces)
+
+    if (playerTurn) {
+      removePieceFromHand(playerOne.pieces, removePieceFromHandOne, selectedPieceIndex)
     } else {
-      const newPieces = Object.assign([], playerTwo.pieces);
-      newPieces.splice(selectedPieceIndex, 1)
-      removePieceFromHandTwo(newPieces)
+      removePieceFromHand(playerTwo.pieces, removePieceFromHandTwo, selectedPieceIndex)
     }
+
+    submitNewMove(round, playerTurn, selectedPieceIndex, index, gameId)
+    
     if (checkEndGame(newTable)) {
       console.log("Fim de Jogo")
       endGame()

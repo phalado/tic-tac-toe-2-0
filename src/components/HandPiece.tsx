@@ -10,12 +10,12 @@ const HandPiece = ({
   game,
   changeSelectedPiece
 }: HandPieceInterface) => {
-  const { currentPlayer, selectedPieceIndex, gameOn } = game;
+  const { playerTurn, selectedPieceIndex, gameOn } = game;
 
   const handleOnClickButton = () => changeSelectedPiece({ index, value })
   
-  const selected = playerNumber === currentPlayer && index === selectedPieceIndex
-  const enabled = playerNumber === currentPlayer && gameOn
+  const selected = playerNumber === playerTurn && index === selectedPieceIndex
+  const enabled = playerNumber === playerTurn && gameOn
 
   return (
     <Button disabled={!enabled} onClick={handleOnClickButton}>

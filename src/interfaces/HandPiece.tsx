@@ -1,11 +1,9 @@
+import GameInterface from "./GameInterface"
+
 export default interface HandPieceInterface {
   playerNumber: boolean
   value: number
   index: number
-  game: {
-    currentPlayer: boolean
-    selectedPieceIndex: number
-    gameOn: true
-  }
+  game: GameInterface
   changeSelectedPiece: ({ index, value }: { index: number, value: number }) => void
 }

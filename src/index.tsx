@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from "react-redux";
 
-import App from "./components/App";
+import App from "./containers/App";
 import gameReducer from './slicers/gameSlicer'
 import tableReducer from './slicers/tableSlicer'
 import playerOneReducer from './slicers/playerOneSlicer'
@@ -15,7 +15,7 @@ const store = configureStore({
     game: gameReducer.reducer,
     table: tableReducer.reducer,
     playerOne: playerOneReducer.reducer,
-    playerTwo: playerTwoReducer.reducer
+    playerTwo: playerTwoReducer.reducer,
   }
 })
 

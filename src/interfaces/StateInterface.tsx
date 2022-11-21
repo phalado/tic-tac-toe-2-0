@@ -1,3 +1,6 @@
+import GameInterface from "./GameInterface"
+import { Socket } from 'socket.io-client'
+
 export default interface StateInterface {
   table: {
     value: number
@@ -11,11 +14,6 @@ export default interface StateInterface {
     username: string
     pieces: number[]
   }
-  game: {
-    round: number
-    currentPlayer: boolean
-    selectedPieceIndex: number
-    selectedPieceValue: number
-    gameOn: true
-  }
+  game: GameInterface
+  socket: Socket
 }
