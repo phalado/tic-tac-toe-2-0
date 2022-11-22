@@ -11,8 +11,12 @@ const playerOneSlice = createSlice({
       ...state,
       pieces: action.payload
     }),
+    changeUserNameOne: (state: any = {}, action: { payload: string }) => ({
+      ...state,
+      userName: action.payload
+    })
   }
 })
 
-export const { removePieceFromHandOne } = playerOneSlice.actions
+export const { removePieceFromHandOne, changeUserNameOne } = playerOneSlice.actions
 export default playerOneSlice;

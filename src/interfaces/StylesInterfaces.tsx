@@ -7,6 +7,18 @@ export interface AppStyleInterface {
   header: React.CSSProperties
   title: React.CSSProperties
   main: React.CSSProperties
+  label: React.CSSProperties
+  usernameContainer: React.CSSProperties
+  button: React.CSSProperties
+  input: React.CSSProperties
+  joinGameContainer: React.CSSProperties
+}
+
+export interface GameStyleInterface {
+  container: React.CSSProperties
+  header: React.CSSProperties
+  title: React.CSSProperties
+  main: React.CSSProperties
 }
 
 export interface LineStyleInterface {
