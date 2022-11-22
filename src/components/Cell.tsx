@@ -43,7 +43,7 @@ const Cell = ({
       removePieceFromHand(playerTwo.pieces, removePieceFromHandTwo, selectedPieceIndex)
     }
 
-    submitNewMove(round, playerTurn, selectedPieceIndex, index, gameId)
+    submitNewMove(round, playerTurn, selectedPieceIndex, selectedPieceValue, index, gameId)
     
     if (checkEndGame(newTable)) {
       console.log("Fim de Jogo")

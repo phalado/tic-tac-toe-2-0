@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from '@mui/material/Button';
 import HandPieceInterface from "../interfaces/HandPiece";
 import Piece from "./Piece";
@@ -10,16 +10,20 @@ const HandPiece = ({
   game,
   changeSelectedPiece
 }: HandPieceInterface) => {
-  const { playerTurn, selectedPieceIndex, gameOn } = game;
+  const { playerTurn, selectedPieceIndex, gameOn, player } = game;
+  const [disabled, setDisabled] = useState(playerNumber !== playerTurn || player !== playerTurn || !gameOn)
+
+  useEffect(() => {
+    setDisabled(playerNumber !== playerTurn || player !== playerTurn || !gameOn)
+  }, [playerTurn, player, gameOn, playerNumber])
 
   const handleOnClickButton = () => changeSelectedPiece({ index, value })
   
   const selected = playerNumber === playerTurn && index === selectedPieceIndex
-  const enabled = playerNumber === playerTurn && gameOn
 
   return (
-    <Button disabled={!enabled} onClick={handleOnClickButton}>
-      <Piece color={playerNumber} value={value} handPiece disabled={!enabled} selected={selected} />
+    <Button disabled={disabled} onClick={handleOnClickButton}>
+      <Piece color={playerNumber} value={value} handPiece disabled={disabled} selected={selected} />
     </Button>
   )
 }

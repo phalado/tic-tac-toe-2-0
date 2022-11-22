@@ -19,7 +19,8 @@ const appStyles: AppStyleInterface = {
     flexDirection: 'column',
     width: '30%',
     margin: 'auto',
-    marginTop: '100px'
+    marginTop: '100px',
+    alignItems: 'center'
   },
   usernameContainer: {
     display: 'flex',
@@ -50,6 +51,15 @@ const appStyles: AppStyleInterface = {
     justifyContent: 'space-around',
     marginTop: '50px',
     alignItems: 'center'
+  },
+  waitingMain: {
+
+  },
+  waitingTitle: {
+    color: 'cornflowerblue',
+  },
+  gameId: {
+    color: 'yellow'
   }
 };
 

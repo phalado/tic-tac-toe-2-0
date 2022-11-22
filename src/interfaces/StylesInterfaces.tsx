@@ -12,6 +12,9 @@ export interface AppStyleInterface {
   button: React.CSSProperties
   input: React.CSSProperties
   joinGameContainer: React.CSSProperties
+  waitingTitle: React.CSSProperties
+  waitingMain: React.CSSProperties
+  gameId: React.CSSProperties
 }
 
 export interface GameStyleInterface {

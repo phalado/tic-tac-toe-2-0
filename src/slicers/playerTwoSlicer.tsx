@@ -13,7 +13,7 @@ const playerTwoSlice = createSlice({
     }),
     changeUserNameTwo: (state: any = {}, action: { payload: string }) => ({
       ...state,
-      userName: action.payload
+      username: action.payload
     })
   }
 })

@@ -14,8 +14,10 @@ const socket:any = io('http://localhost:1337')
 interface NewMoveInterface {
   gameId: string
   round: number
+  playerTurn: boolean
   player: boolean
-  piece: number
+  pieceIndex: number
+  pieceValue: number
   cell: number
 }
 
@@ -30,31 +32,34 @@ const Game = ({
   changeCurrentPlayer,
   endGame,
 }: AppInterface) => {
-  const { gameId, round } = game
+  const { gameId } = game
+  let round = game.round
   // const [endGameModal, setEndGameModal] = useState(false)
 
   useEffect(() => {
     socket.on('newMove', (data: NewMoveInterface) => {
-      console.log(data)
-      if (data.gameId !== gameId || data.round === round) return
+      if (data.gameId !== gameId || data.round <= round) return
 
-      const { player, piece, cell } = data
-      const newTable: TableInterface[] = Object.assign([], table);
-      newTable[cell] = { value: piece, color: player }
-      changeTableState(newTable)
+      if (game.player !== data.player) {
+        const { player, pieceIndex, pieceValue, cell } = data
+        const newTable: TableInterface[] = Object.assign([], table);
+        newTable[cell] = { value: pieceValue, color: player }
+        changeTableState(newTable)
 
-      if (player === true) {
-        removePieceFromHand(playerOne.pieces, removePieceFromHandOne, piece)
-      } else {
-        removePieceFromHand(playerTwo.pieces, removePieceFromHandTwo, piece)
+        if (player === true) {
+          removePieceFromHand(playerOne.pieces, removePieceFromHandOne, pieceIndex)
+        } else {
+          removePieceFromHand(playerTwo.pieces, removePieceFromHandTwo, pieceIndex)
+        }
+
+        if (checkEndGame(newTable)) {
+          console.log("Fim de Jogo")
+          endGame()
+        } else changeCurrentPlayer()
+
+        round++
       }
 
-      if (checkEndGame(newTable)) {
-        console.log("Fim de Jogo")
-        endGame()
-      } else changeCurrentPlayer()
-
-      console.log(data);
       socket.emit('received', { message: 'thx for the message' })
     })
   }, [
@@ -67,7 +72,8 @@ const Game = ({
     removePieceFromHandTwo,
     table,
     changeCurrentPlayer,
-    endGame
+    endGame,
+    game
   ])
 
   return (

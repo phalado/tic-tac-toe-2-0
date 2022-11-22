@@ -36,12 +36,25 @@ const gameSlice = createSlice({
       gameId: action.payload.gameId,
       playerId: action.payload.playerId
     }),
-    startGame: (state: any) => ({
+    startGame: (state: any, action: { payload: { round: number, playerTurn: boolean } }) => ({
       ...state,
-      gameOn: true
+      gameOn: true,
+      round: action.payload.round,
+      playerTurn: action.payload.playerTurn
+    }),
+    changeToPlayerTwo: (state: any) => ({
+      ...state,
+      player: false
     })
   }
 })
 
-export const { changeCurrentPlayer, changeSelectedPiece, endGame, newGame, startGame } = gameSlice.actions
+export const {
+  changeCurrentPlayer,
+  changeSelectedPiece,
+  endGame,
+  newGame,
+  startGame,
+  changeToPlayerTwo
+} = gameSlice.actions
 export default gameSlice;

@@ -17,7 +17,7 @@ const tableSlice = createSlice({
   reducers: {
     changeTableState: (
       _state: any = {}, action: { payload: TableInterface[] }
-    ) => {console.log(action);return(action.payload)},
+    ) => action.payload,
   }
 })
 

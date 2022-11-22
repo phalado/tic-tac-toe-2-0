@@ -4,11 +4,9 @@ export default interface AppInterface {
   game: GameInterface
   playerOne: { username: string, pieces: number[] }
   playerTwo: { username: string, pieces: number[] }
-  // changeTableState: (data: TableInterface[]) => void
-  // changeCurrentPlayer: () => void
-  // removePieceFromHandOne: (pieces: number[]) => void
-  // removePieceFromHandTwo: (pieces: number[]) => void
-  // endGame: () => void
-  changeUserNameOne: (userName: string) => void
-  changeUserNameTwo: (userName: string) => void
+  changeUserNameOne: (username: string) => void
+  changeUserNameTwo: (username: string) => void
+  newGame: (data: { gameId: string, playerId: string }) => void
+  startGame: (data: { round: number, playerTurn: boolean }) => void
+  changeToPlayerTwo: () => void
 }
