@@ -16,4 +16,8 @@ export default interface GameContextInterface {
   playerId: string
   playerTurn: boolean
   setPlayerTurn: (turn: boolean) => void
+  playerOneHand?: number[]
+  playerTwoHand?: number[]
+  selectedPiece?: { index: number, value: number }
+  setSelectedPiece?: (selectedPiece: { index: number, value: number }) => void
 }

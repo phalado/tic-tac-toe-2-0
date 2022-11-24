@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Game from '../containers/Game';
+import Game from '../components/Game';
 import { GameProvider } from './GameContext';
 
 import { io, Socket } from 'socket.io-client'

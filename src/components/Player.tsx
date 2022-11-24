@@ -1,26 +1,35 @@
-import React from "react";
-import PlayerInterface from "../interfaces/PlayerInterface";
-import HandPiece from "../containers/HandPiece";
+import React, { useContext } from "react";
+import HandPiece from "../components/HandPiece";
 
+import { GameContext } from "./GameContext";
 import styles from "../styles/playerStyles";
 
-const Player = ({playerNumber, playerOne, playerTwo}: PlayerInterface) => {
-  let player: { username: string, pieces: number[] }
+const Player = ({ playerNumber }: { playerNumber: boolean }) => {
+  const { playerOneName, playerTwoName, playerOneHand, playerTwoHand } = useContext(GameContext)
+  let player: { username: string, hand: number[] }
   let titleStyles;
 
   if (playerNumber) {
-    player = playerOne;
+    player = {
+      username: playerOneName as string,
+      hand: Object.assign([], playerOneHand as number[])
+    };
     titleStyles = { ...styles.title, ...styles.playerOne }
   } else {
-    player = playerTwo;
+    player = {
+      username: playerTwoName as string,
+      hand: Object.assign([], playerTwoHand as number[])
+    };
     titleStyles = { ...styles.title, ...styles.playerTwo }
   }
+
+  console.log(player, player, playerOneName, playerOneHand, playerTwoHand)
 
   return (
     <div style={styles.container}>
       <h2 style={titleStyles}>{player.username}</h2>
       <div style={styles.piecesContainer}>
-        {player.pieces.map((value, index) => (
+        {player.hand.map((value, index) => (
           <HandPiece playerNumber={playerNumber} value={value} index={index} key={index} />
         ))}
       </div>
