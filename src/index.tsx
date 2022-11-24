@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from "react-redux";
 
-import App from "./containers/App";
+import App from "./components/App";
 import gameReducer from './slicers/gameSlicer'
 import tableReducer from './slicers/tableSlicer'
 import playerOneReducer from './slicers/playerOneSlicer'
