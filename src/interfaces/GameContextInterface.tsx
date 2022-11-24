@@ -1,23 +1,27 @@
-import { ReactElement } from 'react'
-import { Socket } from 'socket.io-client'
+import { ReactElement, SetStateAction } from 'react'
+import TableInterface from './TableInterface'
 
 export default interface GameContextInterface {
   children?: ReactElement
-  socket: Socket
   gameOn: boolean
-  setGameOn: (gameOn: boolean) => void
+  setGameOn: React.Dispatch<SetStateAction<boolean>>
   gameId: string
   setGameId: (id: string) => void
   round: number
-  setRound: (round: number) => void
+  setRound: React.Dispatch<SetStateAction<number>>
   playerOneName: string
   playerTwoName: string
   playerOne: boolean
   playerId: string
   playerTurn: boolean
-  setPlayerTurn: (turn: boolean) => void
-  playerOneHand?: number[]
-  playerTwoHand?: number[]
+  setPlayerTurn: React.Dispatch<SetStateAction<boolean>>
+  table: TableInterface[]
+  playerOneHand: number[]
+  playerTwoHand: number[]
+  updateTable: (cell: number, value: number, color: boolean) => void
+  removePieceFromHandOne: React.Dispatch<number>
+  removePieceFromHandTwo: React.Dispatch<number>
   selectedPiece?: { index: number, value: number }
-  setSelectedPiece?: (selectedPiece: { index: number, value: number }) => void
+  setSelectedPiece?: React.Dispatch<SetStateAction<any>>
+  endGame: () => void
 }

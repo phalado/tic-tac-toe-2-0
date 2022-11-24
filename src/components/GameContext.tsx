@@ -1,11 +1,12 @@
 import React, { createContext, useEffect, useState } from 'react'
-import { removePieceFromHand, updateTable } from '../helpers/CellHelpers'
 import { checkEndGame } from '../helpers/Gamehelpers'
 import GameContextInterface from '../interfaces/GameContextInterface'
 import NewMoveInterface from '../interfaces/NewMoveInterface'
-import { endGame } from '../slicers/gameSlicer'
+import { io, Socket } from 'socket.io-client'
 
-export const GameContext = createContext<Partial<GameContextInterface>>({
+const socket: Socket = io('http://localhost:1337')
+
+export const GameContext = createContext<GameContextInterface>({
   gameOn: false,
   setGameOn: () => {},
   gameId: '',
@@ -18,15 +19,19 @@ export const GameContext = createContext<Partial<GameContextInterface>>({
   playerOne: true,
   playerTurn: true,
   setPlayerTurn: () => {},
+  table: [],
   playerOneHand: [],
   playerTwoHand: [],
+  updateTable: () => {},
+  removePieceFromHandOne: () => {},
+  removePieceFromHandTwo: () => {},
   selectedPiece: { value: -1, index: -1 },
-  setSelectedPiece: () => {}
+  setSelectedPiece: () => {},
+  endGame: () => {},
 })
 
 export const GameProvider = ({
   children,
-  socket,
   gameOn,
   setGameOn,
   gameId,
@@ -38,37 +43,37 @@ export const GameProvider = ({
   playerTwoName,
   playerOne,
   playerTurn,
-  setPlayerTurn
+  setPlayerTurn,
+  table,
+  playerOneHand,
+  playerTwoHand,
+  updateTable,
+  removePieceFromHandOne,
+  removePieceFromHandTwo,
+  endGame,
 }: GameContextInterface) => {
-  const [table, setTable] = useState([
-    {value: 0, color: false},
-    {value: 0, color: false},
-    {value: 0, color: false},
-    {value: 0, color: false},
-    {value: 0, color: false},
-    {value: 0, color: false},
-    {value: 0, color: false},
-    {value: 0, color: false},
-    {value: 0, color: false}
-  ])
-  const [playerOneHand, setPlayerOneHand] = useState([1, 1, 2, 2, 3, 3])
-  const [playerTwoHand, setPlayerTwoHand] = useState([1, 1, 2, 2, 3, 3])
   const [selectedPiece, setSelectedPiece] = useState({ value: -1, index: -1 })
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    if (loading) return;
+
     socket.on('newMove', (data: NewMoveInterface) => {
+      console.log(data, loading, round, data.gameId !== gameId, data.round <= round, playerOne, data.player)
       if (data.gameId !== gameId || data.round <= round) return
 
       if (playerOne !== data.player) {
         const { player, pieceIndex, pieceValue, cell } = data
-        updateTable(cell, pieceValue, player, table, setTable)
+        updateTable(cell, pieceValue, player)
 
-        if (player === true) removePieceFromHand(playerOneHand, setPlayerOneHand, pieceIndex)
-        else removePieceFromHand(playerTwoHand, setPlayerTwoHand, pieceIndex)
+        if (player === true) removePieceFromHandOne(pieceIndex)
+        else removePieceFromHandTwo(pieceIndex)
 
         setPlayerTurn(!playerTurn)
         setRound(round + 1)
       }
+
+      setLoading(true)
 
       socket.emit('received', { message: 'thx for the message' })
     })
@@ -80,18 +85,27 @@ export const GameProvider = ({
     table,
     setPlayerTurn,
     setRound,
-    socket,
     playerOneHand,
-    playerTwoHand
+    playerTwoHand,
+    removePieceFromHandOne,
+    removePieceFromHandTwo,
+    updateTable,
+    loading
   ])
 
   useEffect(() => {
+    console.log('here')
     if (checkEndGame(table)) endGame()
-  }, [table])
+  }, [table, endGame])
+
+  useEffect(() => {
+    setSelectedPiece({ index: -1, value: -1 })
+  }, [playerOneHand, playerTwoHand])
+
+  useEffect(() => setLoading(false), [playerTurn])
 
   return (
     <GameContext.Provider value={{
-      socket,
       gameOn,
       setGameOn,
       gameId,
@@ -104,10 +118,15 @@ export const GameProvider = ({
       playerOne,
       playerTurn,
       setPlayerTurn,
+      table,
       playerOneHand,
       playerTwoHand,
+      updateTable,
+      removePieceFromHandOne,
+      removePieceFromHandTwo,
       selectedPiece,
-      setSelectedPiece
+      setSelectedPiece,
+      endGame,
     }}>
       {children}
     </GameContext.Provider>

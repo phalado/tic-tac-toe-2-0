@@ -1,30 +1,26 @@
-import React from "react";
-import { removePieceFromHand } from "../helpers/CellHelpers";
-import { checkEndGame } from "../helpers/Gamehelpers";
+import React, { useContext } from "react";
 import CellInterface from "../interfaces/CellInterface";
-import TableInterface from "../interfaces/TableInterface";
 import { submitNewMove } from "../services/socketServices";
 
 import styles from "../styles/cellStyles";
+import { GameContext } from "./GameContext";
 import Piece from "./Piece";
 
-const Cell = ({
-  color,
-  value,
-  index,
-  game,
-  table,
-  playerOne,
-  playerTwo,
-  changeTableState,
-  changeCurrentPlayer,
-  removePieceFromHandOne,
-  removePieceFromHandTwo,
-  endGame
-}: CellInterface) => {
-  const { playerTurn, selectedPieceValue, selectedPieceIndex, gameOn, round, gameId } = game
+const Cell = ({ value, color, index }: CellInterface) => {
+  const {
+    playerTurn = true,
+    selectedPiece = { value: -1, index: -1 },
+    gameOn = true,
+    round = 0,
+    gameId = '',
+    updateTable = () => {},
+    removePieceFromHandOne = () => {},
+    removePieceFromHandTwo = () => {},
+    setPlayerTurn = () => {},
+    setRound = () => {},
+  } = useContext(GameContext)
 
-  const clickable = selectedPieceValue > value && gameOn
+  const clickable = selectedPiece.value > value && gameOn
   
   const fillingValue = () => {
     if (value === 0) return null
@@ -33,22 +29,22 @@ const Cell = ({
   }
 
   const handleClickingCell = () => {
-    const newTable: TableInterface[] = Object.assign([], table);
-    newTable[index] = { value: selectedPieceValue, color: playerTurn }
-    changeTableState(newTable)
+    updateTable(index, selectedPiece.value, playerTurn);
 
-    if (playerTurn) {
-      removePieceFromHand(playerOne.pieces, removePieceFromHandOne, selectedPieceIndex)
-    } else {
-      removePieceFromHand(playerTwo.pieces, removePieceFromHandTwo, selectedPieceIndex)
-    }
+    if (playerTurn === true) removePieceFromHandOne(selectedPiece.index);
+    else removePieceFromHandTwo(selectedPiece.index);
 
-    submitNewMove(round, playerTurn, selectedPieceIndex, selectedPieceValue, index, gameId)
-    
-    if (checkEndGame(newTable)) {
-      console.log("Fim de Jogo")
-      endGame()
-    } else changeCurrentPlayer()
+    submitNewMove(
+      round + 1,
+      playerTurn,
+      selectedPiece.index,
+      selectedPiece.value,
+      index,
+      gameId
+    );
+
+    setPlayerTurn(!playerTurn);
+    setRound(round + 1);
   }
 
   if (clickable) {

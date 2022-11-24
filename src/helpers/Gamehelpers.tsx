@@ -19,13 +19,13 @@ const diagonals = [
 
 const checkVictoryCondition = (table: TableInterface[], conditions: number[][]) => (
   conditions.some(cond => (
-    cond.every(index => (table as any)[index].value > 0 && (table as any)[index].color) ||
-      cond.every(index => (table as any)[index].value > 0 && !(table as any)[index].color)
+    cond.every(index => (table as TableInterface[])[index].value > 0 && (table as TableInterface[])[index].color) ||
+      cond.every(index => (table as TableInterface[])[index].value > 0 && !(table as TableInterface[])[index].color)
   ))
 )
 
-export const checkEndGame = (table: TableInterface[]) => {
-    return (checkVictoryCondition(table, horizontals) ||
-      checkVictoryCondition(table, verticals) ||
-      checkVictoryCondition(table, diagonals))
-}
+export const checkEndGame = (table: TableInterface[]) => (
+  checkVictoryCondition(table, horizontals) ||
+    checkVictoryCondition(table, verticals) ||
+    checkVictoryCondition(table, diagonals)
+)

@@ -1,6 +1,6 @@
 import React from 'react';
 import Player from '../components/Player';
-import Table from '../containers/Table';
+import Table from '../components/Table';
 
 import styles from "../styles/gameStyles";
 

@@ -23,8 +23,6 @@ const Player = ({ playerNumber }: { playerNumber: boolean }) => {
     titleStyles = { ...styles.title, ...styles.playerTwo }
   }
 
-  console.log(player, player, playerOneName, playerOneHand, playerTwoHand)
-
   return (
     <div style={styles.container}>
       <h2 style={titleStyles}>{player.username}</h2>

@@ -5,8 +5,9 @@ import { GameProvider } from './GameContext';
 import { io, Socket } from 'socket.io-client'
 import styles from "../styles/appStyles";
 import GameStartInterface from '../interfaces/GameStartInterface';
+import TableInterface from '../interfaces/TableInterface';
 
-const socket:Socket = io('http://localhost:1337')
+const socket: Socket = io('http://localhost:1337')
 
 const App = () => {
   const [gameOn, setGameOn] = useState(false)
@@ -17,7 +18,28 @@ const App = () => {
   const [playerTwoName, setPlayerTwoName] = useState('Luigi')
   const [playerOne, setPlaerOne] = useState(true)
   const [playerTurn, setPlayerTurn] = useState(true)
+  const [table, setTable] = useState(Array(9).fill({ value: 0, color: false }))
+  const [playerOneHand, setPlayerOneHand] = useState([1, 1, 2, 2, 3, 3])
+  const [playerTwoHand, setPlayerTwoHand] = useState([1, 1, 2, 2, 3, 3])
 
+  const updateTable = (cell: number, value: number, color: boolean) => {
+    const newTable: TableInterface[] = Object.assign([], table);
+    newTable[cell] = { value: value, color: color }
+    setTable(newTable)
+  }
+
+  const removePieceFromHandOne = (pieceIndex: number) => {
+    const newPieces = Object.assign([], playerOneHand);
+    newPieces.splice(pieceIndex, 1)
+    setPlayerOneHand(newPieces)
+  }
+
+  const removePieceFromHandTwo = (pieceIndex: number) => {
+    console.log(pieceIndex)
+    const newPieces = Object.assign([], playerTwoHand);
+    newPieces.splice(pieceIndex, 1)
+    setPlayerTwoHand(newPieces)
+  }
 
   useEffect(() => {
     socket.on('gameCreated', (data: { gameId: string, playerId: string }) => {
@@ -38,6 +60,8 @@ const App = () => {
     })
   }, [gameId, gameOn])
 
+  const endGame = () => setGameOn(false);
+
   const handleUsernameChange = (value: string) => setPlayerOneName(value)
 
   const handleCreateGame = () => socket.emit('createGame', { playerOne: playerOneName })
@@ -45,17 +69,16 @@ const App = () => {
   const handleJoinGame = () => {
     const joinGameId: string = (document.getElementById('join-game-input') as HTMLInputElement).value
 
-    setGameId(joinGameId)
-    setPlayerId(joinGameId + 'B')
-    setPlayerTwoName(playerOneName)
-    setPlayerOneName('Mario')
-    setPlaerOne(false)
+    setGameId(joinGameId);
+    setPlayerId(joinGameId + 'B');
+    setPlayerTwoName(playerOneName);
+    setPlayerOneName('Mario');
+    setPlaerOne(false);
     socket.emit('joinGame', { gameId: joinGameId, playerTwo: playerOneName })
   }
 
   if (gameOn) return (
     <GameProvider
-      socket={socket}
       gameOn={gameOn}
       setGameOn={setGameOn}
       gameId={gameId}
@@ -68,6 +91,13 @@ const App = () => {
       playerOne={playerOne}
       playerTurn={playerTurn}
       setPlayerTurn={setPlayerTurn}
+      table={table}
+      playerOneHand={playerOneHand}
+      playerTwoHand={playerTwoHand}
+      updateTable={updateTable}
+      removePieceFromHandOne={removePieceFromHandOne}
+      removePieceFromHandTwo={removePieceFromHandTwo}
+      endGame={endGame}
     >
       <Game />
     </GameProvider>
