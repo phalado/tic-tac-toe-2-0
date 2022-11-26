@@ -7,7 +7,7 @@ import styles from "../styles/appStyles";
 import GameStartInterface from '../interfaces/GameStartInterface';
 import TableInterface from '../interfaces/TableInterface';
 
-const socket: Socket = io('http://localhost:1337')
+const socket: Socket = io(process.env.REACT_APP_SERVER_URL + ":" + process.env.REACT_APP_SERVER_PORT)
 
 const App = () => {
   const [gameOn, setGameOn] = useState(false)
@@ -58,6 +58,8 @@ const App = () => {
       setRound(data.round)
       setPlayerTurn(data.playerTurn)
     })
+
+    socket.on('connectionTested', data => console.log(data))
   }, [gameId, gameOn])
 
   const endGame = () => setGameOn(false);
@@ -75,6 +77,11 @@ const App = () => {
     setPlayerOneName('Mario');
     setPlaerOne(false);
     socket.emit('joinGame', { gameId: joinGameId, playerTwo: playerOneName })
+  }
+
+  const handleTestConnection = () => {
+    console.log(process.env.REACT_APP_SERVER_URL + ":" + process.env.REACT_APP_SERVER_PORT)
+    socket.emit('testConnection')
   }
 
   if (gameOn) return (
@@ -144,6 +151,7 @@ const App = () => {
             id='join-game-input'
           />
         </div>
+        <button style={styles.button} onClick={handleTestConnection}>Test Connection</button>
       </main>
     </div>
   )
