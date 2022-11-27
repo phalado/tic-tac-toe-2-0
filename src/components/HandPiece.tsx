@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import Button from '@mui/material/Button';
 import HandPieceInterface from "../interfaces/HandPiece";
 import Piece from "./Piece";
 import { GameContext } from "./GameContext";
+import styles from "../styles/handPieceStyles";
 
 const HandPiece = ({ playerNumber, value, index }: HandPieceInterface) => {
   const { playerTurn, playerOne, gameOn, selectedPiece, setSelectedPiece } = useContext(GameContext)
@@ -19,9 +19,9 @@ const HandPiece = ({ playerNumber, value, index }: HandPieceInterface) => {
   const selected = playerNumber === playerTurn && index === (selectedPiece as { index: number, value: number }).index
 
   return (
-    <Button disabled={disabled} onClick={handleOnClickButton}>
+    <button style={styles.button} disabled={disabled} onClick={handleOnClickButton}>
       <Piece color={playerNumber} value={value} handPiece disabled={disabled} selected={selected} />
-    </Button>
+    </button>
   )
 }
 

@@ -2,7 +2,8 @@ import { HandPieceStyleInterface } from "../interfaces/StylesInterfaces";
 
 const HandPieceStyles: HandPieceStyleInterface = {
   button: {
-    width: '40%'
+    border: 'none',
+    backgroundColor: 'transparent'
   }
 };
 
