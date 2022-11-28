@@ -4,7 +4,11 @@ var httpServer = createServer();
 var io = new Server(httpServer, { cors: { origin: true } });
 var games = {};
 io.on('connection', function (socket) {
-    socket.on('testConnection', function () { return io.emit('connectionTested', "Server on"); });
+    console.log(socket.event);
+    socket.on('testConnection', function () {
+        console.log('here');
+        io.emit('connectionTested', "Server on");
+    });
     socket.on('createGame', function (_a) {
         var playerOne = _a.playerOne;
         var gameId = '';
