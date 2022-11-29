@@ -7,8 +7,8 @@ import styles from "../styles/appStyles";
 import GameStartInterface from '../interfaces/GameStartInterface';
 import TableInterface from '../interfaces/TableInterface';
 
-const url = process.env.REACT_APP_SERVER_URL + ":" + process.env.REACT_APP_SERVER_PORT
-const socket: Socket = io(url)
+// const url = process.env.REACT_APP_SERVER_URL + ":" + process.env.REACT_APP_SERVER_PORT
+const socket: Socket = io()
 
 const App = () => {
   const [gameOn, setGameOn] = useState(false)
