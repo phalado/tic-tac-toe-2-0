@@ -7,8 +7,8 @@ import styles from "../styles/appStyles";
 import GameStartInterface from '../interfaces/GameStartInterface';
 import TableInterface from '../interfaces/TableInterface';
 
-// const url = process.env.REACT_APP_SERVER_URL + ":" + process.env.REACT_APP_SERVER_PORT
-const socket: Socket = io()
+const url = process.env.REACT_APP_SERVER_URL
+const socket: Socket = io(url as string)
 
 const App = () => {
   const [gameOn, setGameOn] = useState(false)
@@ -81,7 +81,7 @@ const App = () => {
   }
 
   const handleTestConnection = () => {
-    console.log(process.env.REACT_APP_SERVER_URL + ":" + process.env.REACT_APP_SERVER_PORT)
+    console.log(url)
     socket.emit('testConnection')
   }
 
