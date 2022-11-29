@@ -7,11 +7,7 @@ const io = new Server(httpServer, { cors: { origin: true } })
 let games: any = {}
 
 io.on('connection', (socket: any) => {
-  console.log(socket.event)
-  socket.on('testConnection', () => {
-    console.log('here')
-    io.emit('connectionTested', "Server on")
-  })
+  socket.on('testConnection', () => io.emit('connectionTested', "Server on"))
 
   socket.on('createGame', ({ playerOne }: { playerOne: string }) => {
     let gameId: string = ''
