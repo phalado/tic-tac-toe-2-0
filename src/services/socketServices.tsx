@@ -1,7 +1,11 @@
 import { io, Socket } from 'socket.io-client'
 
 const url = process.env.REACT_APP_SERVER_URL
-const socket: Socket = io(url as string)
+const socket: Socket = io(url as string, {
+  extraHeaders: {
+    'Access-Control-Allow-Origin': '*'
+  }
+})
 
 export const submitNewMove = (
   round: number, player: boolean, pieceIndex: number, pieceValue: number, cell: number, gameId: string
