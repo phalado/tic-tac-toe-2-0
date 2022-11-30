@@ -9,9 +9,7 @@ import TableInterface from '../interfaces/TableInterface';
 
 const url = process.env.REACT_APP_SERVER_URL
 const socket: Socket = io(url as string, {
-  extraHeaders: {
-    'Access-Control-Allow-Origin': '*'
-  }
+  withCredentials: true
 })
 
 const App = () => {
