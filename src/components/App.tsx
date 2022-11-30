@@ -8,7 +8,11 @@ import GameStartInterface from '../interfaces/GameStartInterface';
 import TableInterface from '../interfaces/TableInterface';
 
 const url = process.env.REACT_APP_SERVER_URL
-const socket: Socket = io(url as string)
+const socket: Socket = io(url as string, {
+  extraHeaders: {
+    'Access-Control-Allow-Origin': '*'
+  }
+})
 
 const App = () => {
   const [gameOn, setGameOn] = useState(false)
