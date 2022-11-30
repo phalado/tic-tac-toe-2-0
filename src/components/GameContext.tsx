@@ -2,12 +2,10 @@ import React, { createContext, useEffect, useState } from 'react'
 import { checkEndGame } from '../helpers/Gamehelpers'
 import GameContextInterface from '../interfaces/GameContextInterface'
 import NewMoveInterface from '../interfaces/NewMoveInterface'
-import { io, Socket } from 'socket.io-client'
-
-const url = process.env.REACT_APP_SERVER_URL
-const socket: Socket = io(url as string)
+import { io } from 'socket.io-client'
 
 export const GameContext = createContext<GameContextInterface>({
+  socket: io(process.env.REACT_APP_SERVER_URL as string),
   gameOn: false,
   setGameOn: () => {},
   gameId: '',
@@ -33,6 +31,7 @@ export const GameContext = createContext<GameContextInterface>({
 
 export const GameProvider = ({
   children,
+  socket,
   gameOn,
   setGameOn,
   gameId,
@@ -60,7 +59,6 @@ export const GameProvider = ({
     if (loading) return;
 
     socket.on('newMove', (data: NewMoveInterface) => {
-      console.log(data, loading, round, data.gameId !== gameId, data.round <= round, playerOne, data.player)
       if (data.gameId !== gameId || data.round <= round) return
 
       if (playerOne !== data.player) {
@@ -75,8 +73,6 @@ export const GameProvider = ({
       }
 
       setLoading(true)
-
-      socket.emit('received', { message: 'thx for the message' })
     })
   }, [
     gameId,
@@ -91,11 +87,11 @@ export const GameProvider = ({
     removePieceFromHandOne,
     removePieceFromHandTwo,
     updateTable,
-    loading
+    loading,
+    socket
   ])
 
   useEffect(() => {
-    console.log('here')
     if (checkEndGame(table)) endGame()
   }, [table, endGame])
 
@@ -107,6 +103,7 @@ export const GameProvider = ({
 
   return (
     <GameContext.Provider value={{
+      socket,
       gameOn,
       setGameOn,
       gameId,

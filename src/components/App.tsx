@@ -2,24 +2,23 @@ import React, { useEffect, useState } from 'react';
 import Game from '../components/Game';
 import { GameProvider } from './GameContext';
 
-import { io, Socket } from 'socket.io-client'
+import { io } from 'socket.io-client'
 import styles from "../styles/appStyles";
 import GameStartInterface from '../interfaces/GameStartInterface';
 import TableInterface from '../interfaces/TableInterface';
 
-const url = process.env.REACT_APP_SERVER_URL
-const socket: Socket = io(url as string, {
-  withCredentials: true
-})
-
 const App = () => {
+  const [socket] = useState(io(process.env.REACT_APP_SERVER_URL as string, {
+    withCredentials: true
+  }))
   const [gameOn, setGameOn] = useState(false)
   const [gameId, setGameId] = useState('')
   const [playerId, setPlayerId] = useState('')
   const [round, setRound] = useState(0)
   const [playerOneName, setPlayerOneName] = useState('Mario')
   const [playerTwoName, setPlayerTwoName] = useState('Luigi')
-  const [playerOne, setPlaerOne] = useState(true)
+  const [newName, setNewName] = useState('')
+  const [playerOne, setPlayerOne] = useState(true)
   const [playerTurn, setPlayerTurn] = useState(true)
   const [table, setTable] = useState(Array(9).fill({ value: 0, color: false }))
   const [playerOneHand, setPlayerOneHand] = useState([1, 1, 2, 2, 3, 3])
@@ -38,57 +37,66 @@ const App = () => {
   }
 
   const removePieceFromHandTwo = (pieceIndex: number) => {
-    console.log(pieceIndex)
     const newPieces = Object.assign([], playerTwoHand);
     newPieces.splice(pieceIndex, 1)
     setPlayerTwoHand(newPieces)
   }
 
   useEffect(() => {
-    socket.on('gameCreated', (data: { gameId: string, playerId: string }) => {
+    socket.on('gameCreated', (data: { gameId: string }) => {
       if (gameOn === true || gameId) return
 
       setGameId(data.gameId)
-      setPlayerId(data.playerId)
     })
 
     socket.on('gameStart', (data: GameStartInterface) => {
       if (gameOn === true || data.gameId !== gameId) return
 
-      setPlayerOneName(data.playerOne)
-      setPlayerTwoName(data.playerTwo)
+      setPlayerOneName(data.playerOne.name)
+      setPlayerTwoName(data.playerTwo.name)
       setGameOn(true)
       setRound(data.round)
       setPlayerTurn(data.playerTurn)
     })
 
     socket.on('connectionTested', data => console.log(data))
-  }, [gameId, gameOn])
+  }, [gameId, gameOn, socket])
 
   const endGame = () => setGameOn(false);
 
-  const handleUsernameChange = (value: string) => setPlayerOneName(value)
+  const handleUsernameChange = (value: string) => setNewName(value)
 
-  const handleCreateGame = () => socket.emit('createGame', { playerOne: playerOneName })
+  const handleCreateGame = () => {
+    const name = newName === '' ? playerOneName : newName
+    setPlayerId(socket.id)
+    socket.emit('createGame', { playerOne: {
+      name: name,
+      id: socket.id
+    } })
+  }
 
   const handleJoinGame = () => {
     const joinGameId: string = (document.getElementById('join-game-input') as HTMLInputElement).value
 
+    const name = newName === '' ? playerTwoName : newName
     setGameId(joinGameId);
-    setPlayerId(joinGameId + 'B');
-    setPlayerTwoName(playerOneName);
-    setPlayerOneName('Mario');
-    setPlaerOne(false);
-    socket.emit('joinGame', { gameId: joinGameId, playerTwo: playerOneName })
+    setPlayerId(socket.id);
+    setPlayerOne(false);
+
+    socket.emit('joinGame', {
+      gameId: joinGameId,
+      playerTwo: { name: name, id: socket.id }
+    })
   }
 
   const handleTestConnection = () => {
-    console.log(url)
+    console.log(process.env.REACT_APP_SERVER_URL)
     socket.emit('testConnection')
   }
 
   if (gameOn) return (
     <GameProvider
+      socket={socket}
       gameOn={gameOn}
       setGameOn={setGameOn}
       gameId={gameId}

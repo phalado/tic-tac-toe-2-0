@@ -1,13 +1,15 @@
 import React, { useContext } from "react";
 import CellInterface from "../interfaces/CellInterface";
+import Piece from "./Piece";
 import { submitNewMove } from "../services/socketServices";
 
 import styles from "../styles/cellStyles";
 import { GameContext } from "./GameContext";
-import Piece from "./Piece";
+import { io } from "socket.io-client";
 
 const Cell = ({ value, color, index }: CellInterface) => {
   const {
+    socket = io(process.env.REACT_APP_SERVER_URL as string),
     playerTurn = true,
     selectedPiece = { value: -1, index: -1 },
     gameOn = true,
@@ -35,6 +37,7 @@ const Cell = ({ value, color, index }: CellInterface) => {
     else removePieceFromHandTwo(selectedPiece.index);
 
     submitNewMove(
+      socket,
       round + 1,
       playerTurn,
       selectedPiece.index,

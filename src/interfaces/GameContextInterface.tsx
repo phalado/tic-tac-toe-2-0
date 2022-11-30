@@ -1,8 +1,10 @@
 import { ReactElement, SetStateAction } from 'react'
 import TableInterface from './TableInterface'
+import { Socket } from 'socket.io-client'
 
 export default interface GameContextInterface {
   children?: ReactElement
+  socket: Socket
   gameOn: boolean
   setGameOn: React.Dispatch<SetStateAction<boolean>>
   gameId: string
