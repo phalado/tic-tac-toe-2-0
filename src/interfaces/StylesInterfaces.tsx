@@ -59,3 +59,7 @@ export interface PieceStyleInterface {
   disabled: React.CSSProperties
   selected: React.CSSProperties
 }
+
+export interface EndGameModalStylesInterface {
+  content: React.CSSProperties
+}

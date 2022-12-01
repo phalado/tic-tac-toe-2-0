@@ -19,9 +19,15 @@ const diagonals = [
 
 const checkVictoryCondition = (table: TableInterface[], conditions: number[][]) => (
   conditions.some(cond => (
-    cond.every(index => (table as TableInterface[])[index].value > 0 && (table as TableInterface[])[index].color) ||
-      cond.every(index => (table as TableInterface[])[index].value > 0 && !(table as TableInterface[])[index].color)
+    cond.every(index => table[index].value > 0 && table[index].color) ||
+      cond.every(index => table[index].value > 0 && !table[index].color)
   ))
+)
+
+export const checkDraw = (table: TableInterface[], playerOneHand: number[], playerTwoHand: number[]) => (
+  table.every(cell => cell.value > 0) || 
+    !playerOneHand.length ||
+    !playerTwoHand.length
 )
 
 export const checkEndGame = (table: TableInterface[]) => (

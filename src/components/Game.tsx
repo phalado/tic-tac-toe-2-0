@@ -3,6 +3,7 @@ import Player from '../components/Player';
 import Table from '../components/Table';
 
 import styles from "../styles/gameStyles";
+import EndGameModal from './EndGameModal';
 
 const Game = () =>  (
   <div style={styles.container}>
@@ -13,7 +14,7 @@ const Game = () =>  (
       <Player playerNumber={true} />
       <Table />
       <Player playerNumber={false} />
-      {/* <EndGameModal endGameModalOpen={endGameModalOpen} /> */}
+      <EndGameModal />
     </main>
   </div>
 )

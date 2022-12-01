@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { createContext, useEffect, useState } from 'react'
-import { checkEndGame } from '../helpers/Gamehelpers'
+import { checkDraw, checkEndGame } from '../helpers/Gamehelpers'
 import GameContextInterface from '../interfaces/GameContextInterface'
 import NewMoveInterface from '../interfaces/NewMoveInterface'
 import { io } from 'socket.io-client'
@@ -27,6 +28,10 @@ export const GameContext = createContext<GameContextInterface>({
   selectedPiece: { value: -1, index: -1 },
   setSelectedPiece: () => {},
   endGame: () => {},
+  endGameModalOpen: false,
+  setEndGameModalOpen: () => {},
+  victor: '',
+  score: []
 })
 
 export const GameProvider = ({
@@ -51,9 +56,13 @@ export const GameProvider = ({
   removePieceFromHandOne,
   removePieceFromHandTwo,
   endGame,
+  endGameModalOpen,
+  setEndGameModalOpen
 }: GameContextInterface) => {
   const [selectedPiece, setSelectedPiece] = useState({ value: -1, index: -1 })
   const [loading, setLoading] = useState(false)
+  const [victor, setVictor] = useState('')
+  const [score, setScore] = useState([0, 0])
 
   useEffect(() => {
     if (loading) return;
@@ -92,8 +101,21 @@ export const GameProvider = ({
   ])
 
   useEffect(() => {
-    if (checkEndGame(table)) endGame()
-  }, [table, endGame])
+    if (checkEndGame(table)) {
+      if (playerTurn) {
+        setVictor(playerTwoName)
+        setScore(scr => [scr[0], scr[1]++])
+      } else {
+        setVictor(playerOneName)
+        setScore(scr => [scr[0]++, scr[1]])
+      }
+
+      endGame()
+    } else if (checkDraw(table, playerOneHand, playerTwoHand)) {
+      setVictor('draw')
+      endGame()
+    }
+  }, [table])
 
   useEffect(() => {
     setSelectedPiece({ index: -1, value: -1 })
@@ -125,6 +147,10 @@ export const GameProvider = ({
       selectedPiece,
       setSelectedPiece,
       endGame,
+      endGameModalOpen,
+      setEndGameModalOpen,
+      victor,
+      score
     }}>
       {children}
     </GameContext.Provider>

@@ -4,8 +4,8 @@ const TableStyles: SoloContainerInterface = {
   container: {
     backgroundColor: 'white',
     border: 'solid',
-    width: '600px',
-    height: '600px',
+    width: '70vh',
+    height: '70vh',
     position: 'relative',
     margin: 'auto',
     borderRadius: '10px',

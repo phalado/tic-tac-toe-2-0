@@ -25,5 +25,9 @@ export default interface GameContextInterface {
   removePieceFromHandTwo: React.Dispatch<number>
   selectedPiece?: { index: number, value: number }
   setSelectedPiece?: React.Dispatch<SetStateAction<any>>
-  endGame: () => void
+  endGame: () => void,
+  endGameModalOpen: boolean,
+  setEndGameModalOpen: React.Dispatch<SetStateAction<boolean>>
+  victor?: string
+  score?: number[]
 }

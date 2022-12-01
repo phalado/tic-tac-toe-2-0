@@ -8,23 +8,23 @@ const lineStyles: LineStyleInterface = {
   },
   horizontal: {
     width: '0px',
-    height: '582px',
+    height: '97.5%',
   },
   vertical: {
-    width: '582px',
+    width: '97.5%',
     height: '0px',
   },
   right: {
-    right: '188px'
+    right: '32%'
   },
   left: {
-    left: '188px'
+    left: '32%'
   },
   top: {
-    top: '188px'
+    top: '32%'
   },
   bottom: {
-    bottom: '188px'
+    bottom: '32%'
   },
 };
 
