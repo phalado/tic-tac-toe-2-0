@@ -26,8 +26,7 @@ const checkVictoryCondition = (table: TableInterface[], conditions: number[][]) 
 
 export const checkDraw = (table: TableInterface[], playerOneHand: number[], playerTwoHand: number[]) => (
   table.every(cell => cell.value > 0) || 
-    !playerOneHand.length ||
-    !playerTwoHand.length
+    (!playerOneHand.length && !playerTwoHand.length)
 )
 
 export const checkEndGame = (table: TableInterface[]) => (

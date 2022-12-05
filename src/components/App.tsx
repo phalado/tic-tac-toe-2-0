@@ -23,7 +23,7 @@ const App = () => {
   const [table, setTable] = useState(Array(9).fill({ value: 0, color: false }))
   const [playerOneHand, setPlayerOneHand] = useState([1, 1, 2, 2, 3, 3])
   const [playerTwoHand, setPlayerTwoHand] = useState([1, 1, 2, 2, 3, 3])
-  const [endGameModalOpen, setEndGameModalOpen] = useState(false)
+  const [endGameModalOpen, setEndGameModalOpen] = useState(true)
 
   const updateTable = (cell: number, value: number, color: boolean) => {
     const newTable: TableInterface[] = Object.assign([], table);
@@ -71,9 +71,25 @@ const App = () => {
     socket.on('connectionTested', data => console.log(data))
   }, [gameId, gameOn, socket])
 
-  const endGame = () => {
-    setEndGameModalOpen(true)
-    // setGameOn(false)
+  const endGame = () => setEndGameModalOpen(true)
+
+  const returnToHomepage = () => {
+    setGameOn(false)
+    setGameId('')
+    setPlayerOne(true)
+    setTable(Array(9).fill({ value: 0, color: false }))
+    setPlayerOneHand([1, 1, 2, 2, 3, 3])
+    setPlayerTwoHand([1, 1, 2, 2, 3, 3])
+    setEndGameModalOpen(false)
+  }
+
+  const newGameStart = (playerTurn: boolean) => {
+    setRound(1)
+    setPlayerTurn(playerTurn)
+    setEndGameModalOpen(false)
+    setTable(Array(9).fill({ value: 0, color: false }))
+    setPlayerOneHand([1, 1, 2, 2, 3, 3])
+    setPlayerTwoHand([1, 1, 2, 2, 3, 3])
   }
 
   const handleUsernameChange = (value: string) => setNewName(value)
@@ -129,6 +145,8 @@ const App = () => {
       endGame={endGame}
       endGameModalOpen={endGameModalOpen}
       setEndGameModalOpen={setEndGameModalOpen}
+      returnToHomepage={returnToHomepage}
+      newGameStart={newGameStart}
     >
       <Game />
     </GameProvider>

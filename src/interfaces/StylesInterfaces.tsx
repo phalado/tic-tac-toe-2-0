@@ -62,4 +62,14 @@ export interface PieceStyleInterface {
 
 export interface EndGameModalStylesInterface {
   content: React.CSSProperties
+  title: React.CSSProperties
+  scoreboard: React.CSSProperties
+  playerOneScoreContainer: React.CSSProperties
+  playerTwoScoreContainer: React.CSSProperties
+  playerOneScore: React.CSSProperties
+  playerTwoScore: React.CSSProperties
+  playerOneName: React.CSSProperties
+  playerTwoName: React.CSSProperties
+  button: React.CSSProperties
+  buttonsContainer: React.CSSProperties
 }

@@ -31,7 +31,9 @@ export const GameContext = createContext<GameContextInterface>({
   endGameModalOpen: false,
   setEndGameModalOpen: () => {},
   victor: '',
-  score: []
+  score: [],
+  returnToHomepage: () => {},
+  newGameStart: () => {}
 })
 
 export const GameProvider = ({
@@ -57,7 +59,9 @@ export const GameProvider = ({
   removePieceFromHandTwo,
   endGame,
   endGameModalOpen,
-  setEndGameModalOpen
+  setEndGameModalOpen,
+  returnToHomepage,
+  newGameStart
 }: GameContextInterface) => {
   const [selectedPiece, setSelectedPiece] = useState({ value: -1, index: -1 })
   const [loading, setLoading] = useState(false)
@@ -99,6 +103,10 @@ export const GameProvider = ({
     loading,
     socket
   ])
+
+  useEffect(() => {
+    socket.on('newGameStart', data => newGameStart(data.playerTurn))
+  }, [])
 
   useEffect(() => {
     if (checkEndGame(table)) {
@@ -150,7 +158,9 @@ export const GameProvider = ({
       endGameModalOpen,
       setEndGameModalOpen,
       victor,
-      score
+      score,
+      returnToHomepage,
+      newGameStart
     }}>
       {children}
     </GameContext.Provider>

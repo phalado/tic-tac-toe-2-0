@@ -30,4 +30,6 @@ export default interface GameContextInterface {
   setEndGameModalOpen: React.Dispatch<SetStateAction<boolean>>
   victor?: string
   score?: number[]
+  returnToHomepage: () => void
+  newGameStart: (playerTurn: boolean) => void
 }
