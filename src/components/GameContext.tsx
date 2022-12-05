@@ -112,13 +112,13 @@ export const GameProvider = ({
     if (checkEndGame(table)) {
       if (playerTurn) {
         setVictor(playerTwoName)
-        setScore(scr => [scr[0], scr[1]++])
+        setScore(scr => [scr[0], scr[1] + 1])
       } else {
         setVictor(playerOneName)
-        setScore(scr => [scr[0]++, scr[1]])
+        setScore(scr =>  [scr[0] + 1, scr[1]])
       }
 
-      endGame()
+      setTimeout(() => endGame(), 1000)
     } else if (checkDraw(table, playerOneHand, playerTwoHand)) {
       setVictor('draw')
       endGame()

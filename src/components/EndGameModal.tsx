@@ -36,10 +36,10 @@ const EndGameModal = () => {
       <Modal
         isOpen={endGameModalOpen}
         style={styles}
-        contentLabel="Character Modal"
+        contentLabel="Game Over"
       >
         <h1 style={styles.title}>
-          {victor === 'draw' ? 'Game draw!!!' : {victor} + 'won!!!'}
+          {victor === 'draw' ? 'Game draw!!!' : victor + ' won!!!'}
         </h1>
         <div style={styles.scoreboard}>
           <div style={styles.playerOneScoreContainer}>
