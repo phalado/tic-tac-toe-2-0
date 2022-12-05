@@ -23,7 +23,7 @@ const App = () => {
   const [table, setTable] = useState(Array(9).fill({ value: 0, color: false }))
   const [playerOneHand, setPlayerOneHand] = useState([1, 1, 2, 2, 3, 3])
   const [playerTwoHand, setPlayerTwoHand] = useState([1, 1, 2, 2, 3, 3])
-  const [endGameModalOpen, setEndGameModalOpen] = useState(true)
+  const [endGameModalOpen, setEndGameModalOpen] = useState(false)
 
   const updateTable = (cell: number, value: number, color: boolean) => {
     const newTable: TableInterface[] = Object.assign([], table);
