@@ -2,9 +2,16 @@ import React, { useState } from 'react';
 import HeaderInterface from '../interfaces/HeaderInterface';
 import styles from "../styles/appStyles";
 import HowToPlayModal from './Modals/HowToPlayModal';
+import AboutModal from './Modals/AboutModal';
 import SideMenu from './SideMenu';
 
-const Header = ({ howToPlayModal, setHowToPlayModal, handleTestConnection }: HeaderInterface) => {
+const Header = ({
+  howToPlayModal,
+  setHowToPlayModal,
+  handleTestConnection,
+  aboutModal,
+  setAboutModal
+}: HeaderInterface) => {
   const [openMenu, setOpenMenu] = useState(false)
 
   return (
@@ -22,9 +29,12 @@ const Header = ({ howToPlayModal, setHowToPlayModal, handleTestConnection }: Hea
           setOpenMenu={setOpenMenu}
           setHowToPlayModal={setHowToPlayModal}
           handleTestConnection={handleTestConnection}
+          aboutModal={aboutModal}
+          setAboutModal={setAboutModal}
         />
       </div>
       <HowToPlayModal howToPlayModal={howToPlayModal} setHowToPlayModal={setHowToPlayModal} />
+      <AboutModal aboutModal={aboutModal} setAboutModal={setAboutModal} />
     </header>
   )
 }

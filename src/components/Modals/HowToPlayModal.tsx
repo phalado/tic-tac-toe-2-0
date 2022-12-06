@@ -19,6 +19,7 @@ const HowToPlayModal = ({ howToPlayModal, setHowToPlayModal }: HowToPlayModalInt
           src={'./assets/images/xIcon.png'}
           alt="Close modal"
           onClick={() => setHowToPlayModal(false)}
+          title="Close Modal"
         />
         <h1 style={styles.title}>How to play</h1>
         <div>
@@ -31,7 +32,7 @@ const HowToPlayModal = ({ howToPlayModal, setHowToPlayModal }: HowToPlayModalInt
           <p style={styles.paragraph}>It's important to understand that this is, for now, a pure online multiplayer game.</p>
           <p style={styles.paragraph}>Before playing, you need to create a game, receiving a game ID from the server.</p>
           <p style={styles.paragraph}>After that, share your game ID with your <s>guinea pig</s> friend.</p>
-          <p style={styles.paragraph}>You can use the input next t "Change username" t change your username.</p>
+          <p style={styles.paragraph}>You can use the input next to "Change username" to change your username.</p>
           <img style={styles.image} src={'./assets/images/ttt01.gif'} alt="Creating a game" />
         </div>
         <div>
@@ -55,7 +56,6 @@ const HowToPlayModal = ({ howToPlayModal, setHowToPlayModal }: HowToPlayModalInt
           <p style={styles.paragraph}>The only difference is that you will have a draw if both players end up without any coins.</p>
           <img style={styles.image} src={'./assets/images/ttt06.gif'} alt="Game Over" />
           <p style={styles.paragraph}>After the game is over, you can try a rematch with your friend by clicking on "Play Again".</p>
-
         </div>
       </Modal>
     </div>

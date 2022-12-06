@@ -84,3 +84,14 @@ export interface HowToPlaModalStylesInterface {
   image: React.CSSProperties
   xIcon: React.CSSProperties
 }
+
+export interface AboutModalStlesInterface {
+  content: React.CSSProperties
+  title: React.CSSProperties
+  paragraph: React.CSSProperties
+  link: React.CSSProperties
+  image: React.CSSProperties
+  xIcon: React.CSSProperties
+  bigIcon: React.CSSProperties
+  iconContainer: React.CSSProperties
+}

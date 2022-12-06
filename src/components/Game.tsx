@@ -7,12 +7,20 @@ import styles from "../styles/gameStyles";
 import Header from './Header';
 import EndGameModal from './Modals/EndGameModal';
 
-const Game = ({ howToPlayModal, setHowToPlayModal, handleTestConnection }: HeaderInterface) => (
+const Game = ({
+  howToPlayModal,
+  setHowToPlayModal,
+  handleTestConnection,
+  aboutModal,
+  setAboutModal
+}: HeaderInterface) => (
   <div style={styles.container}>
     <Header
         howToPlayModal={howToPlayModal}
         setHowToPlayModal={setHowToPlayModal}
         handleTestConnection={handleTestConnection}
+        aboutModal={aboutModal}
+        setAboutModal={setAboutModal}
       />
     <main style={styles.main}>
       <Player playerNumber={true} />

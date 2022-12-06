@@ -26,6 +26,7 @@ const App = () => {
   const [playerTwoHand, setPlayerTwoHand] = useState([1, 1, 2, 2, 3, 3])
   const [endGameModalOpen, setEndGameModalOpen] = useState(false)
   const [howToPlayModal, setHowToPlayModal] = useState(false)
+  const [aboutModal, setAboutModal] = useState(true)
 
   const updateTable = (cell: number, value: number, color: boolean) => {
     const newTable: TableInterface[] = Object.assign([], table);
@@ -155,6 +156,8 @@ const App = () => {
         howToPlayModal={howToPlayModal}
         setHowToPlayModal={setHowToPlayModal}
         handleTestConnection={handleTestConnection}
+        aboutModal={aboutModal}
+        setAboutModal={setAboutModal}
       />
     </GameProvider>
   )
@@ -165,6 +168,8 @@ const App = () => {
         howToPlayModal={howToPlayModal}
         setHowToPlayModal={setHowToPlayModal}
         handleTestConnection={handleTestConnection}
+        aboutModal={aboutModal}
+        setAboutModal={setAboutModal}
       />
       <main style={styles.main}>
         <div>
@@ -183,6 +188,8 @@ const App = () => {
         howToPlayModal={howToPlayModal}
         setHowToPlayModal={setHowToPlayModal}
         handleTestConnection={handleTestConnection}
+        aboutModal={aboutModal}
+        setAboutModal={setAboutModal}
       />
       <main style={styles.main} id="main">
         <div style={styles.usernameContainer}>
