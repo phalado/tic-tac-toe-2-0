@@ -7,9 +7,13 @@ import styles from "../styles/gameStyles";
 import Header from './Header';
 import EndGameModal from './Modals/EndGameModal';
 
-const Game = ({ howToPlayModal, setHowToPlayModal }: HeaderInterface) => (
+const Game = ({ howToPlayModal, setHowToPlayModal, handleTestConnection }: HeaderInterface) => (
   <div style={styles.container}>
-    <Header howToPlayModal={howToPlayModal} setHowToPlayModal={setHowToPlayModal} />
+    <Header
+        howToPlayModal={howToPlayModal}
+        setHowToPlayModal={setHowToPlayModal}
+        handleTestConnection={handleTestConnection}
+      />
     <main style={styles.main}>
       <Player playerNumber={true} />
       <Table />

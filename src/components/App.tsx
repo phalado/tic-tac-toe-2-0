@@ -25,7 +25,7 @@ const App = () => {
   const [playerOneHand, setPlayerOneHand] = useState([1, 1, 2, 2, 3, 3])
   const [playerTwoHand, setPlayerTwoHand] = useState([1, 1, 2, 2, 3, 3])
   const [endGameModalOpen, setEndGameModalOpen] = useState(false)
-  const [howToPlayModal, setHowToPlayModal] = useState(true)
+  const [howToPlayModal, setHowToPlayModal] = useState(false)
 
   const updateTable = (cell: number, value: number, color: boolean) => {
     const newTable: TableInterface[] = Object.assign([], table);
@@ -64,13 +64,14 @@ const App = () => {
 
     socket.on('error', data => {
       console.log(data)
+      window.alert(data.message)
       if (data.status === 'join') {
         setGameId('');
         setPlayerTwoName('Luigi');
       }
     })
 
-    socket.on('connectionTested', data => console.log(data))
+    socket.on('connectionTested', data => window.alert(data))
   }, [gameId, gameOn, socket])
 
   const endGame = () => setEndGameModalOpen(true)
@@ -120,7 +121,7 @@ const App = () => {
   }
 
   const handleTestConnection = () => {
-    socket.emit('testConnection')
+    socket.emit('testConnection', { id: socket.id })
   }
 
   if (gameOn) return (
@@ -150,13 +151,21 @@ const App = () => {
       returnToHomepage={returnToHomepage}
       newGameStart={newGameStart}
     >
-      <Game howToPlayModal={howToPlayModal} setHowToPlayModal={setHowToPlayModal} />
+      <Game
+        howToPlayModal={howToPlayModal}
+        setHowToPlayModal={setHowToPlayModal}
+        handleTestConnection={handleTestConnection}
+      />
     </GameProvider>
   )
 
   if (gameId) return (
     <div style={styles.container}>
-      <Header howToPlayModal={howToPlayModal} setHowToPlayModal={setHowToPlayModal} />
+      <Header
+        howToPlayModal={howToPlayModal}
+        setHowToPlayModal={setHowToPlayModal}
+        handleTestConnection={handleTestConnection}
+      />
       <main style={styles.main}>
         <div>
           <h1 style={styles.waitingTitle}>
@@ -170,7 +179,11 @@ const App = () => {
 
   return (
     <div style={styles.container}>
-      <Header howToPlayModal={howToPlayModal} setHowToPlayModal={setHowToPlayModal} />
+      <Header
+        howToPlayModal={howToPlayModal}
+        setHowToPlayModal={setHowToPlayModal}
+        handleTestConnection={handleTestConnection}
+      />
       <main style={styles.main} id="main">
         <div style={styles.usernameContainer}>
           <h2 style={styles.label}>Change username: </h2>
@@ -191,7 +204,6 @@ const App = () => {
             id='join-game-input'
           />
         </div>
-        {/* <button style={styles.button} onClick={handleTestConnection}>Test Connection</button> */}
       </main>
     </div>
   )

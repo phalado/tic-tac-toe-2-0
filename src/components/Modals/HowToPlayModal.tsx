@@ -1,12 +1,10 @@
 import React from "react";
 import Modal from "react-modal";
-import HeaderInterface from "../../interfaces/HeaderInterface";
+import HowToPlayModalInterface from "../../interfaces/HowToPlayModalInterface";
 
 import styles from "../../styles/howToPlayModalStyles"
 
-const HowToPlayModal = ({ howToPlayModal, setHowToPlayModal }: HeaderInterface) => {
-  console.log(howToPlayModal)
-
+const HowToPlayModal = ({ howToPlayModal, setHowToPlayModal }: HowToPlayModalInterface) => {
   Modal.setAppElement("#root");
 
   return (
@@ -20,7 +18,7 @@ const HowToPlayModal = ({ howToPlayModal, setHowToPlayModal }: HeaderInterface) 
           style={styles.xIcon}
           src={'./assets/images/xIcon.png'}
           alt="Close modal"
-          onClick={() => {console.log('here'); setHowToPlayModal(false)}}
+          onClick={() => setHowToPlayModal(false)}
         />
         <h1 style={styles.title}>How to play</h1>
         <div>

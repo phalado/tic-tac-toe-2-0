@@ -4,7 +4,7 @@ import styles from "../styles/appStyles";
 import HowToPlayModal from './Modals/HowToPlayModal';
 import SideMenu from './SideMenu';
 
-const Header = ({ howToPlayModal, setHowToPlayModal }: HeaderInterface) => {
+const Header = ({ howToPlayModal, setHowToPlayModal, handleTestConnection }: HeaderInterface) => {
   const [openMenu, setOpenMenu] = useState(false)
 
   return (
@@ -17,7 +17,12 @@ const Header = ({ howToPlayModal, setHowToPlayModal }: HeaderInterface) => {
         onClick={() => setOpenMenu(!openMenu)}
       />
       <div style={styles.menuContainer} id="header">
-        <SideMenu openMenu={openMenu} setOpenMenu={setOpenMenu} />
+        <SideMenu
+          openMenu={openMenu}
+          setOpenMenu={setOpenMenu}
+          setHowToPlayModal={setHowToPlayModal}
+          handleTestConnection={handleTestConnection}
+        />
       </div>
       <HowToPlayModal howToPlayModal={howToPlayModal} setHowToPlayModal={setHowToPlayModal} />
     </header>

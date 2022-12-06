@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction } from 'react'
 
-export default interface HeaderInterface {
+export default interface HowToPlayModalInterface {
   howToPlayModal: boolean
   setHowToPlayModal: Dispatch<SetStateAction<boolean>>
-  handleTestConnection: () => void
 }

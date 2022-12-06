@@ -70,7 +70,7 @@ const appStyles: AppStyleInterface = {
   },
   menuContainer: {
     height: '20%',
-    width: '310px',
+    width: '300px',
     position: 'absolute',
     top: '10%',
     right: '5%'

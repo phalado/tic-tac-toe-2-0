@@ -30,8 +30,8 @@ const HowToPlayModalStyles: HowToPlaModalStylesInterface = {
   },
   xIcon: {
     width: '3%',
-    position: 'absolute',
-    right: '2%',
+    position: 'fixed',
+    right: '10%',
     cursor: 'pointer'
   }
 }

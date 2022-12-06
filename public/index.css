@@ -32,3 +32,29 @@ code {
 .bm-menu {
   overflow: hidden !important;
 }
+
+.bm-overlay {
+  background-color: #eff4f7 !important;
+  border-radius: 5px;
+}
+
+.bm-menu-wrap {
+  text-align: center;
+}
+
+.bm-item-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.bm-item {
+  cursor: pointer;
+  margin: 0;
+  padding: 16px;
+}
+
+.bm-item:hover {
+  background-color: cadetblue;
+  color: white;
+}
