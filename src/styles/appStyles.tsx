@@ -60,6 +60,20 @@ const appStyles: AppStyleInterface = {
   },
   gameId: {
     color: 'yellow'
+  },
+  menuIcon: {
+    width: '5%',
+    height: '5%',
+    position: 'absolute',
+    top: '5%',
+    right: '5%'
+  },
+  menuContainer: {
+    height: '20%',
+    width: '310px',
+    position: 'absolute',
+    top: '10%',
+    right: '5%'
   }
 };
 

@@ -24,7 +24,7 @@ const Piece = ({ color, value, handPiece, disabled, selected }: PieceInterface) 
 
   return (
     <div style={pieceStyles} title={"Level " + value + ": " + level[value - 1]}>
-      <img  style={styles.coffeeImage} src={imagesSrcs[value - 1]} alt={"Coffee level " + value} />
+      <img style={styles.coffeeImage} src={imagesSrcs[value - 1]} alt={"Coffee level " + value} />
     </div>
   )
 }

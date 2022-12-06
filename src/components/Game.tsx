@@ -1,15 +1,15 @@
 import React from 'react';
 import Player from '../components/Player';
 import Table from '../components/Table';
+import HeaderInterface from '../interfaces/HeaderInterface';
 
 import styles from "../styles/gameStyles";
-import EndGameModal from './EndGameModal';
+import Header from './Header';
+import EndGameModal from './Modals/EndGameModal';
 
-const Game = () =>  (
+const Game = ({ howToPlayModal, setHowToPlayModal }: HeaderInterface) => (
   <div style={styles.container}>
-    <header style={styles.header}>
-      <h1 style={styles.title}>Tic-Tac-Toe 2.0</h1>
-    </header>
+    <Header howToPlayModal={howToPlayModal} setHowToPlayModal={setHowToPlayModal} />
     <main style={styles.main}>
       <Player playerNumber={true} />
       <Table />

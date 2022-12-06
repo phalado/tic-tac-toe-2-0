@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import Modal from "react-modal";
-import { GameContext } from "./GameContext";
+import { GameContext } from "../GameContext";
 import { io } from 'socket.io-client'
 
-import styles from "../styles/endGameModalStyles"
+import styles from "../../styles/endGameModalStyles"
 
 const EndGameModal = () => {
   const {

@@ -15,6 +15,8 @@ export interface AppStyleInterface {
   waitingTitle: React.CSSProperties
   waitingMain: React.CSSProperties
   gameId: React.CSSProperties
+  menuIcon: React.CSSProperties
+  menuContainer: React.CSSProperties
 }
 
 export interface GameStyleInterface {
@@ -72,4 +74,13 @@ export interface EndGameModalStylesInterface {
   playerTwoName: React.CSSProperties
   button: React.CSSProperties
   buttonsContainer: React.CSSProperties
+}
+
+export interface HowToPlaModalStylesInterface {
+  content: React.CSSProperties
+  title: React.CSSProperties
+  title2: React.CSSProperties
+  paragraph: React.CSSProperties
+  image: React.CSSProperties
+  xIcon: React.CSSProperties
 }

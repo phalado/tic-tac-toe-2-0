@@ -6,6 +6,7 @@ import { io } from 'socket.io-client'
 import styles from "../styles/appStyles";
 import GameStartInterface from '../interfaces/GameStartInterface';
 import TableInterface from '../interfaces/TableInterface';
+import Header from './Header';
 
 const App = () => {
   const [socket] = useState(io(process.env.REACT_APP_SERVER_URL as string, {
@@ -24,6 +25,7 @@ const App = () => {
   const [playerOneHand, setPlayerOneHand] = useState([1, 1, 2, 2, 3, 3])
   const [playerTwoHand, setPlayerTwoHand] = useState([1, 1, 2, 2, 3, 3])
   const [endGameModalOpen, setEndGameModalOpen] = useState(false)
+  const [howToPlayModal, setHowToPlayModal] = useState(true)
 
   const updateTable = (cell: number, value: number, color: boolean) => {
     const newTable: TableInterface[] = Object.assign([], table);
@@ -148,15 +150,13 @@ const App = () => {
       returnToHomepage={returnToHomepage}
       newGameStart={newGameStart}
     >
-      <Game />
+      <Game howToPlayModal={howToPlayModal} setHowToPlayModal={setHowToPlayModal} />
     </GameProvider>
   )
 
   if (gameId) return (
     <div style={styles.container}>
-      <header style={styles.header}>
-        <h1 style={styles.title}>Tic-Tac-Toe 2.0</h1>
-      </header>
+      <Header howToPlayModal={howToPlayModal} setHowToPlayModal={setHowToPlayModal} />
       <main style={styles.main}>
         <div>
           <h1 style={styles.waitingTitle}>
@@ -170,10 +170,8 @@ const App = () => {
 
   return (
     <div style={styles.container}>
-      <header style={styles.header}>
-        <h1 style={styles.title}>Tic-Tac-Toe 2.0</h1>
-      </header>
-      <main style={styles.main}>
+      <Header howToPlayModal={howToPlayModal} setHowToPlayModal={setHowToPlayModal} />
+      <main style={styles.main} id="main">
         <div style={styles.usernameContainer}>
           <h2 style={styles.label}>Change username: </h2>
           <input
@@ -193,7 +191,7 @@ const App = () => {
             id='join-game-input'
           />
         </div>
-        <button style={styles.button} onClick={handleTestConnection}>Test Connection</button>
+        {/* <button style={styles.button} onClick={handleTestConnection}>Test Connection</button> */}
       </main>
     </div>
   )
