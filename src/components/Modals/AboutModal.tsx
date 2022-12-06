@@ -47,6 +47,7 @@ const AboutModal = ({ aboutModal, setAboutModal }: any) => {
         />
         <h1 style={styles.title}>About Tic-Tac-Toe 2.0</h1>
         <div>
+        <p style={styles.paragraph}>Important: This game is not responsible. I'll work on it in the future.</p>
           <p style={styles.paragraph}>
             This game was developed by
             {' '}
