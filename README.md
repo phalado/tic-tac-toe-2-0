@@ -1,46 +1,114 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Tic-Tac-Toe 2.0
 
-## Available Scripts
 
-In the project directory, you can run:
+This web app is a different version of Tic-Tac-Toe.
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<h1 align="center"><img src="https://rawcdn.githack.com/phalado/tic-tac-toe-2-0/main/public/assets/images/screenshot.png"></h1>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Table of contents
 
-### `npm test`
+- [Tic-Tac-Toe 2.0](#tic-tac-toe-20)
+  - [Table of contents](#table-of-contents)
+  - [About](#about)
+  - [The project](#the-project)
+    - [The game](#the-game)
+    - [The server](#the-server)
+    - [Technologies used](#technologies-used)
+  - [Contact](#contact)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## About
 
-### `npm run build`
+Link to the live version [here][live-version].
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Repository: https://github.com/phalado/tic-tac-toe-2-0
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Server repository: https://github.com/phalado/tic-tac-toe-2-0-server/
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Please, star the projects. It makes me happy.
 
-### `npm run eject`
+## The project
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### The game
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This is an online multiplayer game, so you need a friend to play with (yes, I know that I'm asking too much for you to have a friend).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Before playing, you need to create a game, receiving a game ID from the server.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+After that, share your game ID with your guinea pig friend.
 
-## Learn More
+You can use the input next to "Change username" to change your username.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![ttt01][ttt01]
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+After receiving the game ID, type it in the input next to the "Join Game" button and click on it.
+
+The game must start immediately.
+
+An error will occur if you try to enter an invalid game ID or if you try to join a game with two players.
+
+
+![ttt02][ttt02]
+
+To make a move click on the coin you want to move then the cell that will be its destiny.
+
+![ttt03][ttt03]
+
+The process is the same to overlap a coin. Select a coin bigger than the one you want to overlap and then click on the desired cell.
+
+![ttt04][ttt04]
+
+![ttt05][ttt05]
+
+Basically, the game over rules is the same as the normal Tic-Tac-Toe.
+
+The only difference is that you will have a draw if both players end up without any coins.
+
+![ttt06][ttt06]
+
+After the game is over, you can try a rematch with your friend by clicking on "Play Again".
+
+
+### The server
+
+The server was done using socket.io to create a websocket. It creates an object to store the games' data and be able to share it between the clients.
+
+### Technologies used
+
+To create this project I used:
+
+- Socket.io
+- TypeScript
+- A bit of HTML and CSS
+- React
+- Context
+- Github
+- Netlify for Front-End
+- Heroku for server
+
+## Contact
+
+Author: Raphael Cordeiro
+
+Follow me on [Twitter][rapha-twitter], visit my [Github portfolio][rapha-github], my [Linkedin][rapha-linkedin], or my [personal portfolio][rapha-personal].
+
+
+<!-- Links -->
+
+[live-version]: https://tic-tac-toe-2-0.netlify.app/
+[server]: https://github.com/phalado/tic-tac-toe-2-0-server
+[game]: https://github.com/phalado/tic-tac-toe-2-0/
+[rapha-github]: https://github.com/phalado
+[rapha-twitter]: https://twitter.com/phalado
+[rapha-linkedin]: https://www.linkedin.com/in/raphael-cordeiro/
+[rapha-personal]: https://www.phalado.tech/
+
+<!-- Images -->
+
+[screen]: https://rawcdn.githack.com/phalado/tic-tac-toe-2-0/main/public/assets/images/screenshot.png
+[ttt01]: https://rawcdn.githack.com/phalado/tic-tac-toe-2-0/main/public/assets/images/ttt01.gif
+[ttt02]: https://rawcdn.githack.com/phalado/tic-tac-toe-2-0/main/public/assets/images/ttt02.gif
+[ttt03]: https://rawcdn.githack.com/phalado/tic-tac-toe-2-0/main/public/assets/images/ttt03.gif
+[ttt04]: https://rawcdn.githack.com/phalado/tic-tac-toe-2-0/main/public/assets/images/ttt04.gif
+[ttt05]: https://rawcdn.githack.com/phalado/tic-tac-toe-2-0/main/public/assets/images/ttt05.gif

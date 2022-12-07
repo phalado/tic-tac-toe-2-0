@@ -73,7 +73,8 @@ const appStyles: AppStyleInterface = {
     width: '300px',
     position: 'absolute',
     top: '10%',
-    right: '5%'
+    right: '5%',
+    zIndex: 1
   }
 };
 
